@@ -5,7 +5,7 @@ from conan.tools.build import check_min_cppstd
 import os
 
 
-required_conan_version = ">=2.1"
+required_conan_version = ">=2.4"
 
 
 class BoostCallableTraitsConan(ConanFile):
@@ -16,6 +16,7 @@ class BoostCallableTraitsConan(ConanFile):
     homepage = "https://www.boost.org/"
     topics = ("boost", "metaprogramming" "header-only")
     package_type = "header-library"
+    languages = "C++"
     settings = "os", "arch", "compiler", "build_type"
     no_copy_source = True
 
