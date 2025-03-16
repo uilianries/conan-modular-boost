@@ -1,0 +1,10 @@
+sources:
+  "1.87.0":
+    url:
+    - "https://github.com/boostorg/stl_interfaces/archive/refs/tags/boost-1.87.0.tar.gz"
+    sha256: "9e22b7477fe9103dcaf982354ea38a00e2f600b6a1d4578a81b2082ecd108849"
+licenses:
+  "1.87.0":
+    url: "https://raw.githubusercontent.com/boostorg/boost/refs/tags/boost-1.87.0/LICENSE_1_0.txt"
+    filename: "LICENSE_1_0.txt"
+    sha256: "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566"
