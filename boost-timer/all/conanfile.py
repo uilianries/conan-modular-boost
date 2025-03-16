@@ -26,7 +26,8 @@ class BoostTimerConan(ConanFile):
 
     def requirements(self):
         self.requires(f"boost-headers/{self.version}")
-        self.requires(f"boost-config/{self.version}")
+        # transitive headers: boost/timer.hpp:27
+        self.requires(f"boost-config/{self.version}", transitive_headers=True)
         self.requires(f"boost-io/{self.version}")
         self.requires(f"boost-predef/{self.version}")
     
