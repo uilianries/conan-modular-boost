@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.15)
+
+find_package(boost_config REQUIRED CONFIG)
+find_package(boost_core REQUIRED CONFIG)
+find_package(boost_container_hash REQUIRED CONFIG)
+find_package(boost_predef REQUIRED CONFIG)
+find_package(boost_winapi REQUIRED CONFIG)
+if (BOOST_STACKTRACE_ENABLE_BACKTRACE)
+    find_package(libbacktrace REQUIRED CONFIG)
+endif()
