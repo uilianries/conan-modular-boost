@@ -1,7 +1,6 @@
 from conan import ConanFile
 from conan.tools.files import copy, get, download
 from conan.tools.layout import basic_layout
-from conan.errors import ConanInvalidConfiguration
 import os
 
 
@@ -25,10 +24,6 @@ class BoostWinAPIConan(ConanFile):
 
     def package_id(self):
         self.info.clear()
-
-    def validate(self):
-        if self.settings.os != "Windows":
-            raise ConanInvalidConfiguration(f"{self.ref.name} is only supported on Windows.")
 
     def requirements(self):
         self.requires(f"boost-headers/{self.version}")
