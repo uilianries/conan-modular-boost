@@ -27,14 +27,18 @@ class BoostAtomicConan(ConanFile):
 
     def requirements(self):
         self.requires(f"boost-headers/{self.version}")
-        # transitive headers: boost/timer.hpp:27
+        # transitive headers: boost/atomic/detail/config.hpp:18
         self.requires(f"boost-config/{self.version}", transitive_headers=True)
+        # transitive headers: boost/atomic/atomic_ref.hpp:17
         self.requires(f"boost-assert/{self.version}", transitive_headers=True)
+        # transitive headers: boost/atomic/detail/caps_arch_gcc_arm.hpp:39
         self.requires(f"boost-predef/{self.version}", transitive_headers=True)
+        # transitive headers: boost/atomic/detail/type_traits/is_enum.hpp:21
         self.requires(f"boost-type-traits/{self.version}", transitive_headers=True)
-        self.requires(f"boost-align/{self.version}", transitive_headers=True)
-        self.requires(f"boost-preprocessor/{self.version}", transitive_headers=True)
+        self.requires(f"boost-align/{self.version}")
+        self.requires(f"boost-preprocessor/{self.version}")
         if self.settings.os == "Windows":
+            # transitive headers: boost/atomic/detail/wait_caps_windows.hpp:17
             self.requires(f"boost-winapi/{self.version}", transitive_headers=True)
     
     def layout(self):
