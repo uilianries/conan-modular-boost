@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.15)
+
+find_package(boost_config REQUIRED CONFIG)
+find_package(boost_align REQUIRED CONFIG)
+find_package(boost_assert REQUIRED CONFIG)
+find_package(boost_container REQUIRED CONFIG)
+find_package(boost_container_hash REQUIRED CONFIG)
+find_package(boost_core REQUIRED CONFIG)
+find_package(boost_describe REQUIRED CONFIG)
+find_package(boost_endian REQUIRED CONFIG)
+find_package(boost_mp11 REQUIRED CONFIG)
+find_package(boost_system REQUIRED CONFIG)
+find_package(boost_throw_exception REQUIRED CONFIG)
