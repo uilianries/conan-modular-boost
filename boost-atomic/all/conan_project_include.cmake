@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.15)
+
+find_package(boost_config REQUIRED CONFIG)
+find_package(boost_assert REQUIRED CONFIG)
+find_package(boost_predef REQUIRED CONFIG)
+find_package(boost_type_traits REQUIRED CONFIG)
+find_package(boost_align REQUIRED CONFIG)
+find_package(boost_preprocessor REQUIRED CONFIG)
+if (WIN32)
+  find_package(boost_winapi REQUIRED CONFIG)
+endif()
