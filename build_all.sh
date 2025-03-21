@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 BOOST_VERSION=1.87.0
 
 for folder in $(find . -depth 1 -type d -name "boost-*"); do
