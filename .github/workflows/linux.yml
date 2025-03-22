@@ -31,7 +31,7 @@ jobs:
       - name: Export Boost packages
         run: |
           set -ex
-          for folder in $(find ${GITHUB_WORKSPACE} -depth 1 -type d -name "boost-*"); do
+          for folder in $(find ${GITHUB_WORKSPACE} -maxdepth 1 -type d -name "boost-*"); do
             echo "Exporting $folder"
             conan export $folder/all --version=${{ env.BOOST_VERSION }}
           done
@@ -39,7 +39,7 @@ jobs:
       - name: Build Boost packages
         run: |
           set -ex
-          for folder in $(find ${GITHUB_WORKSPACE} -depth 1 -type d -name "boost-*"); do
+          for folder in $(find ${GITHUB_WORKSPACE} -maxdepth 1 -type d -name "boost-*"); do
             echo "Building $folder"
             conan create $folder/all --version=${{ env.BOOST_VERSION }} --build=missing
           done
