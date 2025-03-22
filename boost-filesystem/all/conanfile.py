@@ -1,5 +1,5 @@
 from conan import ConanFile
-from conan.tools.files import copy, get, download, export_conandata_patches, apply_conandata_patches
+from conan.tools.files import copy, get, download
 from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps, cmake_layout
 from conan.tools.build import check_min_cppstd
 import os
@@ -58,7 +58,6 @@ class BoostFilesystemConan(ConanFile):
 
     def export_sources(self):
         copy(self, "conan_project_include.cmake", self.recipe_folder, self.export_sources_folder)
-        export_conandata_patches(self)
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -103,7 +102,6 @@ class BoostFilesystemConan(ConanFile):
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
         download(self, **self.conan_data["licenses"][self.version])
-        apply_conandata_patches(self)
 
     def generate(self):
         tc = CMakeToolchain(self)
@@ -130,6 +128,8 @@ class BoostFilesystemConan(ConanFile):
     def package(self):
         copy(self, "LICENSE_1_0.txt", self.source_folder, os.path.join(self.package_folder, "licenses"))
         copy(self, "*.hpp", os.path.join(self.source_folder, "include"), os.path.join(self.package_folder, "include"))
+        copy(self, "*.h", os.path.join(self.source_folder, "include"), os.path.join(self.package_folder, "include"))
+        copy(self, "*.ipp", os.path.join(self.source_folder, "include"), os.path.join(self.package_folder, "include"))
         if self.options.shared:
             copy(self, "*.so*", self.build_folder, os.path.join(self.package_folder, "lib"))
             copy(self, "*.dylib*", self.build_folder, os.path.join(self.package_folder, "lib"))
