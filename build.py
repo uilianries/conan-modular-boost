@@ -28,9 +28,17 @@ if __name__ == '__main__':
 
     context = subprocess.run(f'conan graph build-order {conanfile} --format=json', shell=True, capture_output=True, text=True)
     graph = json.loads(context.stdout)
+    references = []
     for level in graph:
         for node in level:
             reference = node['ref'][:node['ref'].find('/')]
             if reference.startswith('boost-') and os.path.isdir(reference):
-                print(f'Creating {reference}')
-                subprocess.run(f'conan create {reference}/all --version={boost_version} --build=missing', shell=True)
+                references.append(reference)
+    
+    print("Build order:")
+    for reference in references:
+        print(reference)
+
+    for reference in references:
+        print(f'Creating {reference}')
+        subprocess.run(f'conan create {reference}/all --version={boost_version} --build=missing', shell=True)
