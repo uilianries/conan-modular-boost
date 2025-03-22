@@ -68,23 +68,23 @@ class BoostFilesystemConan(ConanFile):
 
     def requirements(self):
         self.requires(f"boost-headers/{self.version}")
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/filesystem/config.hpp:19:#include <boost/config.hpp>
         self.requires(f"boost-config/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/filesystem/path.hpp:29:#include <boost/assert.hpp>
         self.requires(f"boost-assert/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/filesystem/path.hpp:33:#include <boost/functional/hash_fwd.hpp>
         self.requires(f"boost-container-hash/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/filesystem/directory.hpp:29:#include <boost/detail/bitmask.hpp>
         self.requires(f"boost-detail/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/filesystem/path.hpp:32:#include <boost/io/quoted.hpp>
         self.requires(f"boost-io/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/filesystem/path.hpp:30:#include <boost/iterator/iterator_facade.hpp>
         self.requires(f"boost-iterator/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/filesystem/exception.hpp:20:#include <boost/smart_ptr/intrusive_ptr.hpp>
         self.requires(f"boost-smart-ptr/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/filesystem.hpp:16:#include <boost/filesystem/path.hpp>
         self.requires(f"boost-system/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/filesystem/detail/type_traits/disjunction.hpp:35:#include <boost/type_traits/disjunction.hpp>
         self.requires(f"boost-type-traits/{self.version}", transitive_headers=True)
 
         self.requires(f"boost-core/{self.version}")
@@ -92,8 +92,7 @@ class BoostFilesystemConan(ConanFile):
         self.requires(f"boost-predef/{self.version}")
         self.requires(f"boost-scope/{self.version}")
         if self.settings.os == "Windows":
-            # transitive headers: boost/atomic/detail/config.hpp:18
-            self.requires(f"boost-winapi/{self.version}", transitive_headers=True)
+            self.requires(f"boost-winapi/{self.version}")
     
     def layout(self):
         cmake_layout(self, src_folder="src")
