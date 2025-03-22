@@ -17,7 +17,7 @@ class BoostCoroutineConan(ConanFile):
     package_type = "library"
     languages = "C++"
     settings = "os", "arch", "compiler", "build_type"
-    implements = ["auto_shared_fpic"]    
+    implements = ["auto_shared_fpic"]
     options = {"shared": [True, False], "fPIC": [True, False], "use_segmented_stacks": [True, False]}
     default_options = {"shared": False, "fPIC": True, "use_segmented_stacks": False}
 
@@ -46,21 +46,21 @@ class BoostCoroutineConan(ConanFile):
         self.requires(f"boost-type-traits/{self.version}", transitive_headers=True)
         # transitive headers: boost/coroutine/detail/pull_coroutine_impl.hpp:14:#include <boost/utility.hpp>
         self.requires(f"boost-utility/{self.version}", transitive_headers=True)
-    
+
     def layout(self):
         cmake_layout(self, src_folder="src")
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
         download(self, **self.conan_data["licenses"][self.version])
-    
+
     def generate(self):
         tc = CMakeToolchain(self)
         # Boost does not have find_package, so we need to include them manually
         tc.cache_variables["CMAKE_PROJECT_boost_coroutine_INCLUDE"] = os.path.join(self.source_folder, os.pardir, "conan_project_include.cmake")
         tc.generate()
         deps = CMakeDeps(self)
-        deps.generate()        
+        deps.generate()
 
     def build(self):
         cmake = CMake(self)

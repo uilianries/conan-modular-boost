@@ -18,7 +18,7 @@ class BoostRandomConan(ConanFile):
     package_type = "library"
     languages = "C++"
     settings = "os", "arch", "compiler", "build_type"
-    implements = ["auto_shared_fpic"]    
+    implements = ["auto_shared_fpic"]
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
 
@@ -53,7 +53,7 @@ class BoostRandomConan(ConanFile):
         self.requires(f"boost-array/{self.version}", transitive_headers=True)
         # transitive headers: boost/random/seed_seq.hpp:19:#include <boost/range/begin.hpp>
         self.requires(f"boost-range/{self.version}", transitive_headers=True)
-    
+
     def layout(self):
         cmake_layout(self, src_folder="src")
 
@@ -63,7 +63,7 @@ class BoostRandomConan(ConanFile):
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
         download(self, **self.conan_data["licenses"][self.version])
-    
+
     def generate(self):
         tc = CMakeToolchain(self)
         # Boost does not have find_package, so we need to include them manually
@@ -71,7 +71,7 @@ class BoostRandomConan(ConanFile):
         tc.cache_variables["BUILD_TESTING"] = False
         tc.generate()
         deps = CMakeDeps(self)
-        deps.generate()        
+        deps.generate()
 
     def build(self):
         cmake = CMake(self)

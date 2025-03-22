@@ -18,7 +18,7 @@ class BoostNowideConan(ConanFile):
     package_type = "library"
     languages = "C++"
     settings = "os", "arch", "compiler", "build_type"
-    implements = ["auto_shared_fpic"]    
+    implements = ["auto_shared_fpic"]
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
 
@@ -31,7 +31,7 @@ class BoostNowideConan(ConanFile):
         self.requires(f"boost-config/{self.version}", transitive_headers=True)
         # transitive headers: boost/nowide/filesystem.hpp:11:#include <boost/filesystem/path.hpp>
         self.requires(f"boost-filesystem/{self.version}", transitive_headers=True)
-    
+
     def layout(self):
         cmake_layout(self, src_folder="src")
 
@@ -41,7 +41,7 @@ class BoostNowideConan(ConanFile):
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
         download(self, **self.conan_data["licenses"][self.version])
-    
+
     def generate(self):
         tc = CMakeToolchain(self)
         # Boost does not have find_package, so we need to include them manually
@@ -49,7 +49,7 @@ class BoostNowideConan(ConanFile):
         tc.cache_variables["BUILD_TESTING"] = False
         tc.generate()
         deps = CMakeDeps(self)
-        deps.generate()        
+        deps.generate()
 
     def build(self):
         cmake = CMake(self)

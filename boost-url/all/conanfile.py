@@ -18,7 +18,7 @@ class BoostURLConan(ConanFile):
     package_type = "library"
     languages = "C++"
     settings = "os", "arch", "compiler", "build_type"
-    implements = ["auto_shared_fpic"]    
+    implements = ["auto_shared_fpic"]
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
 
@@ -48,7 +48,7 @@ class BoostURLConan(ConanFile):
         # transitive headers: boost/url/variant.hpp:14
         self.requires(f"boost-variant2/{self.version}", transitive_headers=True)
         self.requires(f"boost-throw-exception/{self.version}")
-    
+
     def layout(self):
         cmake_layout(self, src_folder="src")
 
@@ -58,7 +58,7 @@ class BoostURLConan(ConanFile):
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
         download(self, **self.conan_data["licenses"][self.version])
-    
+
     def generate(self):
         tc = CMakeToolchain(self)
         # Boost does not have find_package, so we need to include them manually
@@ -72,7 +72,7 @@ class BoostURLConan(ConanFile):
         # There is no dedicated Boost cmake file for individual libraries
         replace_in_file(self, os.path.join(self.source_folder, "CMakeLists.txt"), "find_package(Boost REQUIRED COMPONENTS container)", "")
 
-    def build(self):        
+    def build(self):
         self._patch_sources()
         cmake = CMake(self)
         cmake.configure()

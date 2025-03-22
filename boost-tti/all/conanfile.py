@@ -31,7 +31,7 @@ class BoostTTIConan(ConanFile):
         self.requires(f"boost-function-types/{self.version}")
         self.requires(f"boost-mpl/{self.version}")
         self.requires(f"boost-preprocessor/{self.version}")
-        self.requires(f"boost-type-traits/{self.version}")        
+        self.requires(f"boost-type-traits/{self.version}")
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)

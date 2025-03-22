@@ -18,7 +18,7 @@ class BoostFilesystemConan(ConanFile):
     package_type = "library"
     languages = "C++"
     settings = "os", "arch", "compiler", "build_type"
-    implements = ["auto_shared_fpic"]    
+    implements = ["auto_shared_fpic"]
     options = {
         "shared": [True, False],
         "fPIC": [True, False],
@@ -92,7 +92,7 @@ class BoostFilesystemConan(ConanFile):
         self.requires(f"boost-scope/{self.version}")
         if self.settings.os == "Windows":
             self.requires(f"boost-winapi/{self.version}")
-    
+
     def layout(self):
         cmake_layout(self, src_folder="src")
 

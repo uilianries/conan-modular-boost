@@ -17,7 +17,7 @@ class BoostContainerConan(ConanFile):
     package_type = "library"
     languages = "C++"
     settings = "os", "arch", "compiler", "build_type"
-    implements = ["auto_shared_fpic"]    
+    implements = ["auto_shared_fpic"]
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
 
@@ -34,21 +34,21 @@ class BoostContainerConan(ConanFile):
         self.requires(f"boost-intrusive/{self.version}", transitive_headers=True)
         # transitive headers: boost/container/detail/addressof.hpp:21
         self.requires(f"boost-move/{self.version}", transitive_headers=True)
-    
+
     def layout(self):
         cmake_layout(self, src_folder="src")
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
         download(self, **self.conan_data["licenses"][self.version])
-    
+
     def generate(self):
         tc = CMakeToolchain(self)
         # Boost does not have find_package, so we need to include them manually
         tc.cache_variables["CMAKE_PROJECT_boost_container_INCLUDE"] = os.path.join(self.source_folder, os.pardir, "conan_project_include.cmake")
         tc.generate()
         deps = CMakeDeps(self)
-        deps.generate()        
+        deps.generate()
 
     def build(self):
         cmake = CMake(self)

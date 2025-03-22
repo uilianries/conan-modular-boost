@@ -18,7 +18,7 @@ class BoostContextConan(ConanFile):
     package_type = "library"
     languages = "C++"
     settings = "os", "arch", "compiler", "build_type"
-    implements = ["auto_shared_fpic"]    
+    implements = ["auto_shared_fpic"]
     options = {"shared": [True, False], "fPIC": [True, False], "implementation": ["fcontext", "ucontext", "winfib"]}
     default_options = {"shared": False, "fPIC": True, "implementation": "fcontext"}
 
@@ -41,7 +41,7 @@ class BoostContextConan(ConanFile):
         self.requires(f"boost-predef/{self.version}", transitive_headers=True)
         # transitive headers: boost/context/pooled_fixedsize_stack.hpp:17
         self.requires(f"boost-smart-ptr/{self.version}", transitive_headers=True)
-    
+
     def layout(self):
         cmake_layout(self, src_folder="src")
 
@@ -51,14 +51,14 @@ class BoostContextConan(ConanFile):
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
         download(self, **self.conan_data["licenses"][self.version])
-    
+
     def generate(self):
         tc = CMakeToolchain(self)
         # Boost does not have find_package, so we need to include them manually
         tc.cache_variables["CMAKE_PROJECT_boost_context_INCLUDE"] = os.path.join(self.source_folder, os.pardir, "conan_project_include.cmake")
         tc.generate()
         deps = CMakeDeps(self)
-        deps.generate()        
+        deps.generate()
 
     def build(self):
         cmake = CMake(self)

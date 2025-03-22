@@ -52,9 +52,9 @@ class BoostRegexConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.set_property("cmake_file_name", "boost_regex")
-        self.cpp_info.set_property("cmake_target_name", "Boost::regex")        
+        self.cpp_info.set_property("cmake_target_name", "Boost::regex")
         self.cpp_info.defines = ["BOOST_HAS_ICU"]
         self.cpp_info.components["regex_icu"].bindirs = []
         self.cpp_info.components["regex_icu"].libdirs = []
 
-        
+

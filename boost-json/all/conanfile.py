@@ -18,7 +18,7 @@ class BoostJsonConan(ConanFile):
     package_type = "library"
     languages = "C++"
     settings = "os", "arch", "compiler", "build_type"
-    implements = ["auto_shared_fpic"]    
+    implements = ["auto_shared_fpic"]
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
 
@@ -49,7 +49,7 @@ class BoostJsonConan(ConanFile):
         self.requires(f"boost-system/{self.version}", transitive_headers=True)
         # transitive headers: boost/json/detail/impl/except.ipp:15
         self.requires(f"boost-throw-exception/{self.version}", transitive_headers=True)
-    
+
     def layout(self):
         cmake_layout(self, src_folder="src")
 
@@ -61,7 +61,7 @@ class BoostJsonConan(ConanFile):
         download(self, **self.conan_data["licenses"][self.version])
         # INFO: Do not try to include other boost libraries as subdirectories
         replace_in_file(self, os.path.join(self.source_folder, "CMakeLists.txt"), "add_subdirectory(../.. _deps/boost EXCLUDE_FROM_ALL)", "")
-    
+
     def generate(self):
         tc = CMakeToolchain(self)
         # Boost does not have find_package, so we need to include them manually
@@ -72,7 +72,7 @@ class BoostJsonConan(ConanFile):
         tc.cache_variables["BOOST_JSON_BUILD_BENCHMARKS"] = False
         tc.generate()
         deps = CMakeDeps(self)
-        deps.generate()        
+        deps.generate()
 
     def build(self):
         cmake = CMake(self)
@@ -97,7 +97,7 @@ class BoostJsonConan(ConanFile):
     def package_info(self):
         self.cpp_info.set_property("cmake_file_name", "boost_json")
         self.cpp_info.set_property("cmake_target_name", "Boost::json")
-        self.cpp_info.libs = ["boost_json"]        
+        self.cpp_info.libs = ["boost_json"]
         self.cpp_info.defines = [
             "BOOST_JSON_NO_LIB",
             "BOOST_JSON_DYN_LINK" if self.options.shared else "BOOST_JSON_STATIC_LINK"]

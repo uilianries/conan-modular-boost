@@ -14,7 +14,7 @@ if __name__ == '__main__':
         if os.path.isdir(folder) and folder.startswith('boost-'):
             print(f'Exporting {folder}')
             subprocess.run(f'conan export {folder}/all --version={boost_version}', shell=True)
-    
+
     temp_dir = os.getenv('RUNNER_TEMP') or "/tmp"
     conanfile = os.path.join(temp_dir, 'conanfile.txt')
     boost_modules = []
@@ -34,7 +34,7 @@ if __name__ == '__main__':
             reference = node['ref'][:node['ref'].find('/')]
             if reference.startswith('boost-') and os.path.isdir(reference):
                 references.append(reference)
-    
+
     print("Build order:")
     for reference in references:
         print(reference)

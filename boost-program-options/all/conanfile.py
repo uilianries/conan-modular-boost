@@ -18,7 +18,7 @@ class BoostProgramOptionsConan(ConanFile):
     package_type = "library"
     languages = "C++"
     settings = "os", "arch", "compiler", "build_type"
-    implements = ["auto_shared_fpic"]    
+    implements = ["auto_shared_fpic"]
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
 
@@ -52,7 +52,7 @@ class BoostProgramOptionsConan(ConanFile):
 
         self.requires(f"boost-bind/{self.version}")
         self.requires(f"boost-tokenizer/{self.version}")
-    
+
     def layout(self):
         cmake_layout(self, src_folder="src")
 
@@ -62,7 +62,7 @@ class BoostProgramOptionsConan(ConanFile):
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
         download(self, **self.conan_data["licenses"][self.version])
-    
+
     def generate(self):
         tc = CMakeToolchain(self)
         # Boost does not have find_package, so we need to include them manually
@@ -70,7 +70,7 @@ class BoostProgramOptionsConan(ConanFile):
         tc.cache_variables["BUILD_TESTING"] = False
         tc.generate()
         deps = CMakeDeps(self)
-        deps.generate()        
+        deps.generate()
 
     def build(self):
         cmake = CMake(self)
