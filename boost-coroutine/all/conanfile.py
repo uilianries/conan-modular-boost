@@ -45,7 +45,7 @@ class BoostCoroutineConan(ConanFile):
         # transitive headers: boost/coroutine/detail/setup.hpp:15:#include <boost/type_traits/is_same.hpp>
         self.requires(f"boost-type-traits/{self.version}", transitive_headers=True)
         # transitive headers: boost/coroutine/detail/pull_coroutine_impl.hpp:14:#include <boost/utility.hpp>
-        self.requires(f"boost-utility/{self.version}", transitive_headers=True)        
+        self.requires(f"boost-utility/{self.version}", transitive_headers=True)
     
     def layout(self):
         cmake_layout(self, src_folder="src")
