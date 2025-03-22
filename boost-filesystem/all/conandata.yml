@@ -1,0 +1,16 @@
+sources:
+  "1.87.0":
+    url:
+    - "https://github.com/boostorg/filesystem/archive/refs/tags/boost-1.87.0.tar.gz"
+    sha256: "d2c995d064149de6f55b741c2c329b29eb9d20b841d5562fa51989b69dd1d7c9"
+patches:
+  "1.87.0":
+    - patch_file: "patches/0001-fix-header-ext.patch"
+      patch_description: "Fix importing header extentions"
+      patch_url: "https://github.com/boostorg/filesystem/pull/331"
+      patch_type: "bugfix"
+licenses:
+  "1.87.0":
+    url: "https://raw.githubusercontent.com/boostorg/boost/refs/tags/boost-1.87.0/LICENSE_1_0.txt"
+    filename: "LICENSE_1_0.txt"
+    sha256: "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566"
