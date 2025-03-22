@@ -16,7 +16,7 @@ if __name__ == '__main__':
             subprocess.run(f'conan export {folder}/all --version={boost_version}', shell=True)
     
     temp_dir = os.getenv('RUNNER_TEMP') or "/tmp"
-    conanfile = f'{temp_dir}/conanfile.txt'
+    conanfile = os.path.join(temp_dir, 'conanfile.txt')
     boost_modules = []
     for folder in os.listdir('.'):
         if os.path.isdir(folder) and folder.startswith('boost-'):
