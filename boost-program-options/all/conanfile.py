@@ -27,27 +27,27 @@ class BoostProgramOptionsConan(ConanFile):
 
     def requirements(self):
         self.requires(f"boost-headers/{self.version}")
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/program_options/config.hpp:10:#include <boost/config.hpp>
         self.requires(f"boost-config/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/program_options/options_description.hpp:18:#include <boost/any.hpp>
         self.requires(f"boost-any/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/program_options/detail/config_file.hpp:14:#include <boost/noncopyable.hpp>
         self.requires(f"boost-core/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/program_options/options_description.hpp:17:#include <boost/detail/workaround.hpp>
         self.requires(f"boost-detail/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/program_options/value_semantic.hpp:13:#include <boost/function/function1.hpp>
         self.requires(f"boost-function/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/program_options/eof_iterator.hpp:9:#include <boost/iterator/iterator_facade.hpp>
         self.requires(f"boost-iterator/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/program_options/value_semantic.hpp:14:#include <boost/lexical_cast.hpp>
         self.requires(f"boost-lexical-cast/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/program_options/detail/config_file.hpp:28:#include <boost/shared_ptr.hpp>
         self.requires(f"boost-smart-ptr/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/program_options/detail/config_file.hpp:26:#include <boost/static_assert.hpp>
         self.requires(f"boost-static-assert/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/program_options/detail/value_semantic.hpp:9:#include <boost/throw_exception.hpp>
         self.requires(f"boost-throw-exception/{self.version}", transitive_headers=True)
-        # transitive headers: boost/atomic/detail/config.hpp:18
+        # transitive headers: boost/program_options/detail/config_file.hpp:27:#include <boost/type_traits/is_same.hpp>
         self.requires(f"boost-type-traits/{self.version}", transitive_headers=True)
 
         self.requires(f"boost-bind/{self.version}")
