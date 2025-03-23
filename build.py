@@ -41,4 +41,4 @@ if __name__ == '__main__':
 
     for reference in references:
         print(f'Creating {reference}')
-        subprocess.run(f'conan create {reference}/all --version={boost_version} --build=missing', shell=True)
+        subprocess.run(f'conan create {reference}/all --version={boost_version} --build=missing -s compiler.cppstd=17', shell=True)
