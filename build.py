@@ -30,7 +30,7 @@ if __name__ == '__main__':
         for module in boost_modules:
             fd.write(f"{module}/{boost_version}\n")
 
-    context = subprocess.run(f'conan graph build-order {conanfile} --format=json', shell=True, capture_output=True, text=True, check=True)
+    context = subprocess.run(f'conan graph build-order {conanfile} --format=json --build=missing -s compiler.cppstd=17', shell=True, capture_output=True, text=True, check=True)
     graph = json.loads(context.stdout)
     references = []
     for level in graph:
