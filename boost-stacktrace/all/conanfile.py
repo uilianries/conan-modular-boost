@@ -2,6 +2,7 @@ from conan import ConanFile
 from conan.tools.files import copy, get, download
 from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps, cmake_layout
 from conan.tools.microsoft import is_msvc
+from conan.tools.apple import is_apple_os
 import os
 
 
@@ -44,6 +45,7 @@ class BoostTimerConan(ConanFile):
 
     def export_sources(self):
         copy(self, "conan_project_include.cmake", self.recipe_folder, self.export_sources_folder)
+        copy(self, "CMakeLists.txt", self.recipe_folder, self.export_sources_folder)
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -77,6 +79,10 @@ class BoostTimerConan(ConanFile):
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
         download(self, **self.conan_data["licenses"][self.version])
+        # FIXME: The check_cxx_source_compiles is used to find backtrace, but lacks header and library folder
+        # This workaround enforce to use the CMake target for libbacktrace without patching the source
+        # It replaces the CMake file for testing and mark build testing as enabled
+        copy(self, "CMakeLists.txt", src=self.export_sources_folder, dst=os.path.join(self.source_folder, "test"))
 
     def generate(self):
         tc = CMakeToolchain(self)
@@ -87,12 +93,17 @@ class BoostTimerConan(ConanFile):
         tc.cache_variables["BOOST_STACKTRACE_ENABLE_NOOP"] = self.options.enable_noop
         tc.cache_variables["BOOST_STACKTRACE_ENABLE_BASIC"] = self.options.enable_basic
         tc.cache_variables["BOOST_STACKTRACE_ENABLE_FROM_EXCEPTION"] = self.options.enable_from_exception
+        tc.cache_variables["BUILD_TESTING"] = self.options.enable_backtrace
         if self.settings.os == "Windows":
             tc.cache_variables["BOOST_STACKTRACE_ENABLE_WINDGB"] = self.options.enable_windbg
             tc.cache_variables["BOOST_STACKTRACE_ENABLE_WINDGB_CACHED"] = self.options.enable_windbg_cached
         if self.options.enable_addr2line:
             addr2line_path = os.path.join(self.dependencies["libbacktrace"].cpp_info.bindir, "addr2line")
             tc.preprocessor_definitions["BOOST_STACKTRACE_ADDR2LINE_LOCATION"] = addr2line_path
+        if "x86" not in str(self.settings.arch) and self.options.enable_from_exception:
+            # https://github.com/boostorg/stacktrace/blob/develop/src/from_exception.cpp#L171
+            # This feature is guarded by BOOST_STACKTRACE_ALWAYS_STORE_IN_PADDING, but that is only enabled on x86.
+            tc.preprocessor_definitions["BOOST_STACKTRACE_LIBCXX_RUNTIME_MAY_CAUSE_MEMORY_LEAK"] = "1"
         tc.generate()
         deps = CMakeDeps(self)
         deps.generate()
