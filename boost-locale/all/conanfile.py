@@ -114,8 +114,6 @@ class BoostLocaleConan(ConanFile):
         self.cpp_info.set_property("cmake_file_name", "boost_locale")
         self.cpp_info.set_property("cmake_target_name", "Boost::locale")
         self.cpp_info.libs = ["boost_locale"]
-        if self.settings.os in ["Linux", "FreeBSD"]:
-            self.cpp_info.system_libs = ["pthread"]
         self.cpp_info.defines = [
             "BOOST_LOCALE_NO_LIB",
             "BOOST_LOCALE_DYN_LINK" if self.options.shared else "BOOST_LOCALE_STATIC_LINK"]
