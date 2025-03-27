@@ -88,8 +88,10 @@ class BoostCoroutineConan(ConanFile):
         self.cpp_info.libs = ["boost_coroutine"]
         if self.settings.os in ["Linux", "FreeBSD"]:
             self.cpp_info.system_libs = ["pthread"]
+        # INFO: Boost Coroutine has duplicated/messed defines: COROUTINE COUROUTINES
         self.cpp_info.defines = [
-            "BOOST_COROUTINE_NO_LIB",
-            "BOOST_COROUTINE_DYN_LINK" if self.options.shared else "BOOST_COROUTINE_STATIC_LINK"]
+            "BOOST_COROUTINE_NO_LIB=1", "BOOST_COROUTINES_NO_LIB=1"
+            "BOOST_COROUTINE_DYN_LINK=1" if self.options.shared else "BOOST_COROUTINE_STATIC_LINK=1",
+            "BOOST_COROUTINES_DYN_LINK=1" if self.options.shared else "BOOST_COROUTINES_STATIC_LINK=1"]
         if self.options.use_segmented_stacks:
-            self.cpp_info.defines.append("BOOST_USE_SEGMENTED_STACKS")
+            self.cpp_info.defines.append("BOOST_USE_SEGMENTED_STACKS=1")

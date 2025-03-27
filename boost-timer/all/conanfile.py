@@ -70,4 +70,6 @@ class BoostTimerConan(ConanFile):
         self.cpp_info.set_property("cmake_file_name", "boost_timer")
         self.cpp_info.set_property("cmake_target_name", "Boost::timer")
         self.cpp_info.libs = ["boost_timer"]
-        self.cpp_info.defines = ["BOOST_TIMER_DYN_LINK" if self.options.shared else "BOOST_TIMER_STATIC_LINK"]
+        self.cpp_info.defines = [
+            "BOOST_TIMER_NO_LIB",
+            "BOOST_TIMER_DYN_LINK" if self.options.shared else "BOOST_TIMER_STATIC_LINK"]

@@ -48,9 +48,10 @@ class BoostTimerConan(ConanFile):
         copy(self, "CMakeLists.txt", self.recipe_folder, self.export_sources_folder)
 
     def config_options(self):
+        if is_msvc(self):
+            del self.options.enable_addr2line
         if self.settings.os == "Windows":
             del self.options.fPIC
-            self.options.enable_addr2line = not is_msvc(self)
         else:
             del self.options.enable_windbg
             del self.options.enable_windbg_cached
@@ -89,16 +90,16 @@ class BoostTimerConan(ConanFile):
         # Boost does not have find_package, so we need to include them manually
         tc.cache_variables["CMAKE_PROJECT_boost_stacktrace_INCLUDE"] = os.path.join(self.source_folder, os.pardir, "conan_project_include.cmake")
         tc.cache_variables["BOOST_STACKTRACE_ENABLE_BACKTRACE"] = self.options.enable_backtrace
-        tc.cache_variables["BOOST_STACKTRACE_ENABLE_ADDR2LINE"] = self.options.enable_addr2line
+        tc.cache_variables["BOOST_STACKTRACE_ENABLE_ADDR2LINE"] = self.options.get_safe("enable_addr2line", False)
         tc.cache_variables["BOOST_STACKTRACE_ENABLE_NOOP"] = self.options.enable_noop
         tc.cache_variables["BOOST_STACKTRACE_ENABLE_BASIC"] = self.options.enable_basic
         tc.cache_variables["BOOST_STACKTRACE_ENABLE_FROM_EXCEPTION"] = self.options.enable_from_exception
         tc.cache_variables["BUILD_TESTING"] = self.options.enable_backtrace
         if self.settings.os == "Windows":
-            tc.cache_variables["BOOST_STACKTRACE_ENABLE_WINDGB"] = self.options.enable_windbg
-            tc.cache_variables["BOOST_STACKTRACE_ENABLE_WINDGB_CACHED"] = self.options.enable_windbg_cached
-        if self.options.enable_addr2line:
-            addr2line_path = os.path.join(self.dependencies["libbacktrace"].cpp_info.bindir, "addr2line")
+            tc.cache_variables["BOOST_STACKTRACE_ENABLE_WINDBG"] = self.options.enable_windbg
+            tc.cache_variables["BOOST_STACKTRACE_ENABLE_WINDBG_CACHED"] = self.options.enable_windbg_cached
+        if self.options.get_safe("enable_addr2line", False):
+            addr2line_path = os.path.join(self.dependencies["libbacktrace"].cpp_info.bindir, "addr2line").replace("\\", "/")
             tc.preprocessor_definitions["BOOST_STACKTRACE_ADDR2LINE_LOCATION"] = addr2line_path
         if "x86" not in str(self.settings.arch) and self.options.enable_from_exception:
             # https://github.com/boostorg/stacktrace/blob/develop/src/from_exception.cpp#L171
@@ -133,6 +134,8 @@ class BoostTimerConan(ConanFile):
         self.cpp_info.set_property("cmake_target_name", "Boost::stacktrace")
         for component in ["addr2line", "backtrace", "basic", "noop", "windbg", "windbg_cached", "from_exception"]:
             if component in ["windbg", "windbg_cached"] and self.settings.os != "Windows":
+                continue
+            if not self.options.get_safe(f"enable_{component}"):
                 continue
             self.cpp_info.components[component].set_property("cmake_target_name", f"Boost::stacktrace_{component}")
             self.cpp_info.components[component].libs = [f"boost_stacktrace_{component}"]
