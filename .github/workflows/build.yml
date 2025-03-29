@@ -48,7 +48,7 @@ jobs:
           conan profile detect -f
 
       - name: Restore Conan cache
-        if: ${{ steps.check_cache.outputs.exists == 'true' }}
+        if: hashFiles('cache/${{ runner.os }}_conan_cache_save.tgz') != ''
         run: conan cache restore cache/${{ runner.os }}_conan_cache_save.tgz
 
       - name: Build Boost packages
