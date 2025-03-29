@@ -3,6 +3,7 @@ import subprocess
 import argparse
 import json
 import logging
+import sys
 
 
 if __name__ == '__main__':
@@ -55,10 +56,11 @@ if __name__ == '__main__':
         for module in folder_list:
             fd.write(f"{module}/{boost_version}\n")
 
-    context = subprocess.run(f'conan graph build-order {conanfile} --format=json --order-by=recipe --build=missing -s compiler.cppstd=20', shell=True, capture_output=True, text=True)
+    logger.info(f"Calculating build order for {len(folder_list)} Boost modules.")
+    context = subprocess.run(f'conan graph build-order {conanfile} --format=json --order-by=recipe --update --build=missing -s compiler.cppstd=20', shell=True, capture_output=True, text=True)
     if context.returncode != 0:
         logger.error(f"Failed to build order: {context.stderr}")
-        exit(1)
+        sys,exit(1)
     graph = json.loads(context.stdout)
     references = []
     for level in graph["order"]:
