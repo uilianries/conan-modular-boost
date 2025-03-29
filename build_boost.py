@@ -53,6 +53,11 @@ if __name__ == '__main__':
     conanfile = os.path.join(temp_dir, 'conanfile.txt')
     last_built = os.path.join(temp_dir, 'conan_last_built.txt')
 
+    if sys.platform.startswith('win'):
+        skipped_modules = ['boost-mpi', 'boost-graph-parallel', 'boost-graph-odeint', 'boost-property-map-parallel',]
+        logger.warning(f"=== Windows detected. Skipping {skipped_modules} ===")
+        folder_list = [folder for folder in folder_list if not any(module in folder for module in skipped_modules)]
+
     with open(conanfile, 'w') as fd:
         fd.write("[requires]\n")
         for module in folder_list:
@@ -98,7 +103,7 @@ if __name__ == '__main__':
                 if "boost-mpi" in reference and sys.platform.startswith('win'):
                     logger.error(f"Boost MPI is not supported on Windows. Skipping {reference}.")
                     continue
-                elif "Invalid configuration" in context.stdout:
+                elif "Invalid configuration" in context.stderr:
                     logger.error(f"Invalid configuration for {reference}. Skipping.")
                     continue
                 else:
