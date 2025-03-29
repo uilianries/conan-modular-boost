@@ -43,7 +43,7 @@ jobs:
       - name: Install Conan
         run: |
           pip install conan
-          conan profile detect
+          conan profile detect -f
 
       - name: Build Boost packages
         run: python build_boost.py
