@@ -9,10 +9,11 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
 
-    arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument('-bv', '--boost-version', type=str, default='1.87.0', description="Boost project version")
-    arg_parser.add_argument('-se', '--skip-export', action='store_true', description="Do not run conan export for all Boost modules")
-    arg_parser.add_argument('-sc', '--skip-create', action='store_true', description="Do not run conan create for all Boost modules")
+    arg_parser = argparse.ArgumentParser(prog='build_boost',
+                    description='Export and build all boost modules')
+    arg_parser.add_argument('-bv', '--boost-version', type=str, default='1.87.0', help="Boost project version")
+    arg_parser.add_argument('-se', '--skip-export', action='store_true', help="Do not run conan export for all Boost modules")
+    arg_parser.add_argument('-sc', '--skip-create', action='store_true', help="Do not run conan create for all Boost modules")
     args = arg_parser.parse_args()
     boost_version = args.boost_version
     folder_list = []
