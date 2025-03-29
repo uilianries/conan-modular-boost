@@ -49,6 +49,7 @@ jobs:
 
       - name: Restore Conan cache
         if: hashFiles('cache/${{ runner.os }}_conan_cache_save.tgz') != ''
+        continue-on-error: true
         run: conan cache restore cache/${{ runner.os }}_conan_cache_save.tgz
 
       - name: Build Boost packages
