@@ -13,7 +13,7 @@ env:
 jobs:
   build-boost:
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         os:
           - ubuntu-latest
@@ -46,6 +46,9 @@ jobs:
         run: |
           pip install conan
           conan profile detect -f
+
+      - name: Install Ninja build system
+        uses: seanmiddleditch/gha-setup-ninja@v6
 
       - name: Restore Conan cache
         if: hashFiles('cache/${{ runner.os }}_conan_cache_save.tgz') != ''

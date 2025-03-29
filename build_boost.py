@@ -16,6 +16,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('-se', '--skip-export', action='store_true', help="Do not run conan export for all Boost modules")
     arg_parser.add_argument('-sc', '--skip-create', action='store_true', help="Do not run conan create for all Boost modules")
     arg_parser.add_argument('-lb', '--last_build', action='store_true', help="Continue building from the last built module that failed")
+    arg_parser.add_argument('-dn', '--disable_ninja', action='store_true', help="Do not use Ninja build system")
     args = arg_parser.parse_args()
     boost_version = args.boost_version
     folder_list = []
@@ -73,6 +74,7 @@ if __name__ == '__main__':
     logger.info(f"=== Build order ({len(references)}): {references} ===")
 
     if not args.skip_create:
+        ninja_conf = "" if args.disable_ninja else " -c tools.cmake.cmaketoolchain:generator=Ninja "
         total = len(references)
         for index, reference in enumerate(references):
             if continue_last_built:
@@ -90,4 +92,15 @@ if __name__ == '__main__':
             logger.info(f'=== Creating {reference} ({index + 1}/{total}) ===')
             with open(last_built, 'w') as fd:
                 fd.write(reference)
-            subprocess.run(f'conan create {reference}/all --version={boost_version} --build=missing -s compiler.cppstd=20', shell=True, check=True)
+            context = subprocess.run(f'conan create {reference}/all --version={boost_version} --build=missing -s compiler.cppstd=20 {ninja_conf}', shell=True)
+            if context.returncode != 0:
+                logger.error(f"Failed to create {reference}: {context.stderr}")
+                if "boost-mpi" in reference and sys.platform.startswith('win'):
+                    logger.error(f"Boost MPI is not supported on Windows. Skipping {reference}.")
+                    continue
+                elif "Invalid configuration" in context.stdout:
+                    logger.error(f"Invalid configuration for {reference}. Skipping.")
+                    continue
+                else:
+                    logger.error(f"Failed to create {reference}.")
+                    break
