@@ -9,6 +9,8 @@ This is a modularized version of the [Boost](https://www.boost.org/) library for
 
 The dependencies levels are split into the following modules: https://pdimov.github.io/boostdep-report/boost-1.87.0/module-levels.html
 
+The extracte content is available in JSON format in the file [boost_module_dependencies.json](boost_module_dependencies.json).
+
 ## License
 
 [MIT](LICENSE)
