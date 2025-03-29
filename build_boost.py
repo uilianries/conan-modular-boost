@@ -54,7 +54,7 @@ if __name__ == '__main__':
     last_built = os.path.join(temp_dir, 'conan_last_built.txt')
 
     if sys.platform.startswith('win'):
-        skipped_modules = ['boost-mpi', 'boost-graph-parallel', 'boost-graph-odeint', 'boost-property-map-parallel',]
+        skipped_modules = ['boost-mpi', 'boost-graph-parallel', 'boost-odeint', 'boost-property-map-parallel',]
         logger.warning(f"=== Windows detected. Skipping {skipped_modules} ===")
         folder_list = [folder for folder in folder_list if not any(module in folder for module in skipped_modules)]
 
