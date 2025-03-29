@@ -14,11 +14,13 @@ if __name__ == '__main__':
     arg_parser.add_argument('-bv', '--boost-version', type=str, default='1.87.0', help="Boost project version")
     arg_parser.add_argument('-se', '--skip-export', action='store_true', help="Do not run conan export for all Boost modules")
     arg_parser.add_argument('-sc', '--skip-create', action='store_true', help="Do not run conan create for all Boost modules")
+    arg_parser.add_argument('-lb', '--last_build', action='store_true', help="Continue building from the last built module that failed")
     args = arg_parser.parse_args()
     boost_version = args.boost_version
     folder_list = []
     header_libraries = []
     regular_libraries = []
+    continue_last_built = args.last_build
 
     for folder in os.listdir('.'):
         if os.path.isdir(folder) and folder.startswith('boost-'):
@@ -46,6 +48,7 @@ if __name__ == '__main__':
 
     temp_dir = os.getenv('RUNNER_TEMP') or "/tmp"
     conanfile = os.path.join(temp_dir, 'conanfile.txt')
+    last_built = os.path.join(temp_dir, 'conan_last_built.txt')
 
     with open(conanfile, 'w') as fd:
         fd.write("[requires]\n")
@@ -65,5 +68,19 @@ if __name__ == '__main__':
 
     if not args.skip_create:
         for reference in references:
+            if continue_last_built:
+                if os.path.exists(last_built):
+                    with open(last_built, 'r') as fd:
+                        last_reference = str(fd.read()).strip()
+                    if reference == last_reference:
+                        continue_last_built = False
+                    else:
+                        continue
+                else:
+                    continue_last_built = False
+                    logger.error(f'Could not find {last_built} to continue from.')
+
             logger.info(f'Creating {reference}')
+            with open(last_built, 'w') as fd:
+                fd.write(reference)
             subprocess.run(f'conan create {reference}/all --version={boost_version} --build=missing -s compiler.cppstd=20', shell=True, check=True)
