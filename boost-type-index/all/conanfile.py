@@ -30,7 +30,6 @@ class BoostTypeIndexConan(ConanFile):
         self.requires(f"boost-headers/{self.version}")
         self.requires(f"boost-config/{self.version}")
         self.requires(f"boost-container-hash/{self.version}")
-        self.requires(f"boost-core/{self.version}")
         self.requires(f"boost-throw-exception/{self.version}")
 
     def validate(self):

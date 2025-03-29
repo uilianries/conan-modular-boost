@@ -64,8 +64,6 @@ class BoostTestConan(ConanFile):
         # transitive headers: boost/test/tools/assertion.hpp:24:#include <boost/utility/declval.hpp>
         self.requires(f"boost-utility/{self.version}", transitive_headers=True)
 
-        self.requires(f"boost-describe/{self.version}")
-
     def layout(self):
         cmake_layout(self, src_folder="src")
 

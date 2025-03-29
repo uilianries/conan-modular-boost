@@ -43,7 +43,6 @@ class BoostSerializationConan(ConanFile):
         self.requires(f"boost-spirit/{self.version}", transitive_headers=True)
         self.requires(f"boost-static-assert/{self.version}", transitive_headers=True)
         self.requires(f"boost-type-traits/{self.version}", transitive_headers=True)
-        self.requires(f"boost-unordered/{self.version}", transitive_headers=True)
         self.requires(f"boost-utility/{self.version}", transitive_headers=True)
         self.requires(f"boost-variant/{self.version}", transitive_headers=True)
         self.requires(f"boost-mp11/{self.version}", transitive_headers=True)

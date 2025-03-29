@@ -29,7 +29,6 @@ class BoostPropertyMapParallelConan(ConanFile):
         self.requires(f"boost-headers/{self.version}")
         self.requires(f"boost-config/{self.version}")
         self.requires(f"boost-assert/{self.version}")
-        self.requires(f"boost-bind/{self.version}")
         self.requires(f"boost-concept-check/{self.version}")
         self.requires(f"boost-function/{self.version}")
         self.requires(f"boost-mpi/{self.version}")

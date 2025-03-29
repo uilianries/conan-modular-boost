@@ -45,7 +45,6 @@ class BoostBeastConan(ConanFile):
         self.requires(f"boost-system/{self.version}")
         self.requires(f"boost-throw-exception/{self.version}")
         self.requires(f"boost-type-traits/{self.version}")
-        self.requires(f"boost-utility/{self.version}")
         self.requires(f"boost-winapi/{self.version}")
         self.requires(f"boost-container-hash/{self.version}")
         self.requires(f"boost-preprocessor/{self.version}")

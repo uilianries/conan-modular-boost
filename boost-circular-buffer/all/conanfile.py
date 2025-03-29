@@ -30,7 +30,6 @@ class BoostCircularBufferConan(ConanFile):
         self.requires(f"boost-config/{self.version}")
         self.requires(f"boost-assert/{self.version}")
         self.requires(f"boost-concept-check/{self.version}")
-        self.requires(f"boost-core/{self.version}")
         self.requires(f"boost-move/{self.version}")
         self.requires(f"boost-static-assert/{self.version}")
         self.requires(f"boost-throw-exception/{self.version}")

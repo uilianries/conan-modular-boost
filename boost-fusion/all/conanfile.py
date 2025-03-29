@@ -39,8 +39,6 @@ class BoostFusionConan(ConanFile):
         self.requires(f"boost-typeof/{self.version}")
         self.requires(f"boost-utility/{self.version}")
         self.requires(f"boost-functional/{self.version}")
-        self.requires(f"boost-describe/{self.version}")
-        self.requires(f"boost-mp11/{self.version}")
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)

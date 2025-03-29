@@ -30,7 +30,6 @@ class BoostScopeConan(ConanFile):
         self.requires(f"boost-headers/{self.version}")
         self.requires(f"boost-config/{self.version}")
         self.requires(f"boost-assert/{self.version}")
-        self.requires(f"boost-core/{self.version}")
         self.requires(f"boost-type-traits/{self.version}")
 
     def validate(self):
