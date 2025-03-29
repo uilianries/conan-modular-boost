@@ -47,7 +47,8 @@ class BoostMPIConan(ConanFile):
 
         self.requires(f"boost-lexical-cast/{self.version}")
         self.requires(f"boost-utility/{self.version}")
-        self.requires("openmpi/4.1.6", options={"enable_cxx": True}, transitive_headers=True)
+        if self.settings.os != "Windows":
+            self.requires("openmpi/4.1.6", options={"enable_cxx": True}, transitive_headers=True)
 
     def layout(self):
         cmake_layout(self, src_folder="src")
