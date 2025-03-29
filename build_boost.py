@@ -37,7 +37,7 @@ if __name__ == '__main__':
                     header_libraries.append(folder)
                 else:
                     regular_libraries.append(folder)
-    
+
     logger.info(f"Found {len(header_libraries)} Boost modules that are header-only libraries.")
     logger.info(f"Found {len(regular_libraries)} Boost modules that are regular libraries.")
 
@@ -55,7 +55,10 @@ if __name__ == '__main__':
         for module in folder_list:
             fd.write(f"{module}/{boost_version}\n")
 
-    context = subprocess.run(f'conan graph build-order {conanfile} --format=json --build=missing -s compiler.cppstd=20', shell=True, capture_output=True, text=True, check=True)
+    context = subprocess.run(f'conan graph build-order {conanfile} --format=json --build=missing -s compiler.cppstd=20', shell=True, capture_output=True, text=True)
+    if context.returncode != 0:
+        logger.error(f"Failed to build order: {context.stderr}")
+        exit(1)
     graph = json.loads(context.stdout)
     references = []
     for level in graph:
