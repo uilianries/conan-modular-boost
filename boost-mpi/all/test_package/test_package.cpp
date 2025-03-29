@@ -1,9 +1,7 @@
-#include <boost/mpi.hpp>
+#include <boost/mpi/config.hpp>
 #include <iostream>
 
-int main(int argc, char* argv[]) {
-    boost::mpi::environment env(argc, argv);
-    boost::mpi::communicator world;
-    std::cout << "Boost MPI test package: " << world.rank() << " " << world.size() << std::endl;
+int main(void) {
+    std::cout << "Boost MPI test package: " << BOOST_MPI_VERSION << std::endl;
     return 0;
 }
