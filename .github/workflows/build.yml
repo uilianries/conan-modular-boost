@@ -50,10 +50,10 @@ jobs:
       - name: Restore Conan cache
         if: hashFiles('cache/${{ runner.os }}_conan_cache_save.tgz') != ''
         continue-on-error: true
-        run: conan cache restore cache/${{ runner.os }}_conan_cache_save.tgz
+        run: conan cache restore cache/${{ runner.os }}_conan_cache_save.tgz --out-file=conan_restore_output.json
 
       - name: Build Boost packages
         run: python build_boost.py
 
       - name: Backup Conan cache
-        run: conan cache save "*/*:*" --file cache/${{ runner.os }}_conan_cache_save.tgz
+        run: conan cache save "*/*:*" --file cache/${{ runner.os }}_conan_cache_save.tgz --out-file=conan_save_output.json
