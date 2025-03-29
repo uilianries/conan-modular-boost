@@ -94,7 +94,7 @@ class BoostSerializationConan(ConanFile):
                 "BOOST_SERIALIZATION_NO_LIB",
                 "BOOST_SERIALIZATION_DYN_LINK" if self.options.shared else "BOOST_SERIALIZATION_STATIC_LINK"]
             self.cpp_info.components[component].requires = ["boost-headers::boost-headers", "boost-config::boost-config",
-                "boost-array::boost-array", "boost-assert::boost-assert",
+                "boost-array::boost-array", "boost-function::boost-function",
                 "boost-core::boost-core", "boost-detail::boost-detail",
                 "boost-integer::boost-integer", "boost-io::boost-io",
                 "boost-iterator::boost-iterator", "boost-move::boost-move",
@@ -103,6 +103,5 @@ class BoostSerializationConan(ConanFile):
                 "boost-smart-ptr::boost-smart-ptr", "boost-spirit::boost-spirit",
                 "boost-static-assert::boost-static-assert",
                 "boost-type-traits::boost-type-traits", "boost-unordered::boost-unordered",
-                "boost-utility::boost-utility", "boost-variant::boost-variant",
-                "boost-function::boost-function"]
+                "boost-utility::boost-utility", "boost-variant::boost-variant",]
         self.cpp_info.components["wserialization"].requires.append("serialization")

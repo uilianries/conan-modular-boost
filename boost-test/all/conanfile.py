@@ -123,7 +123,6 @@ class BoostTestConan(ConanFile):
                 "boost-bind::boost-bind",
                 "boost-core::boost-core",
                 "boost-detail::boost-detail",
-                "boost-describe::boost-describe",
                 "boost-exception::boost-exception",
                 "boost-function::boost-function",
                 "boost-io::boost-io",

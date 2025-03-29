@@ -143,6 +143,7 @@ class BoostTimerConan(ConanFile):
             self.cpp_info.components[component].requires = [
                 "boost-headers::boost-headers",
                 "boost-config::boost-config",
+                "boost-assert::boost-assert",
                 "boost-container-hash::boost-container-hash",
                 "boost-core::boost-core",
                 "boost-predef::boost-predef",
