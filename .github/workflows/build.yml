@@ -37,9 +37,10 @@ jobs:
         uses: actions/cache@v4
         with:
           path: cache/
-          key: ${{ hashFiles('**/conanfile.py') }}
+          key: ${{ runner.os }}
           restore-keys: |
             ${{ hashFiles('cache/*.tgz') }}
+            ${{ hashFiles('**/conanfile.py') }}
 
       - name: Install Conan
         run: |
