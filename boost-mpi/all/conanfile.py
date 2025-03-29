@@ -1,6 +1,7 @@
 from conan import ConanFile
 from conan.tools.files import copy, get, download
 from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps, cmake_layout
+from conan.errors import ConanInvalidConfiguration
 import os
 
 
@@ -60,6 +61,10 @@ class BoostMPIConan(ConanFile):
 
     def layout(self):
         cmake_layout(self, src_folder="src")
+
+    def validate(self):
+        if self.settings.os == "Windows":
+            raise ConanInvalidConfiguration("Boost MPI requires MS-MPI on Windows, which is not available in Conan Center.")
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
