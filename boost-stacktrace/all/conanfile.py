@@ -65,6 +65,8 @@ class BoostTimerConan(ConanFile):
         self.requires(f"boost-config/{self.version}", transitive_headers=True)
         # transitive headers: boost/stacktrace/stacktrace.hpp:16
         self.requires(f"boost-container-hash/{self.version}", transitive_headers=True)
+        # transitive headers: stacktrace/stacktrace.hpp:15
+        self.requires(f"boost-core/{self.version}", transitive_headers=True)
         # transitive headers: boost/stacktrace/detail/collect_unwind.ipp:19
         self.requires(f"boost-predef/{self.version}", transitive_headers=True)
         # transitive headers: boost/stacktrace/safe_dump_to.hpp:18

@@ -31,6 +31,7 @@ class BoostArrayConan(ConanFile):
         self.requires(f"boost-assert/{self.version}")
         self.requires(f"boost-static-assert/{self.version}")
         self.requires(f"boost-throw-exception/{self.version}")
+        self.requires(f"boost-core/{self.version}")
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)

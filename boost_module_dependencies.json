@@ -39,7 +39,7 @@
         {"boost-align": ["boost-headers", "boost-assert", "boost-static-assert"]},
         {"boost-array": ["boost-headers", "boost-assert", "boost-static-assert", "boost-throw-exception"]},
         {"boost-bind": ["boost-headers", "boost-core"]},
-        {"boost-charconv": ["boost-headers", "boost-assert", "boost-core"]},
+        {"boost-charconv": ["boost-headers", "boost-assert", "boost-assert", "boost-core"]},
         {"boost-circular-buffer": ["boost-headers", "boost-assert", "boost-concept-check", "boost-move", "boost-static-assert", "boost-throw-exception", "boost-type-traits"]},
         {"boost-detail": ["boost-headers", "boost-preprocessor", "boost-static-assert", "boost-type-traits"]},
         {"boost-integer": ["boost-headers", "boost-assert", "boost-static-assert", "boost-throw-exception", "boost-type-traits"]},

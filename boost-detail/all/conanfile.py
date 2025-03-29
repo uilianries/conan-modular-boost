@@ -28,6 +28,7 @@ class BoostDetailConan(ConanFile):
     def requirements(self):
         self.requires(f"boost-headers/{self.version}")
         self.requires(f"boost-config/{self.version}")
+        self.requires(f"boost-core/{self.version}")
         self.requires(f"boost-preprocessor/{self.version}")
         self.requires(f"boost-static-assert/{self.version}")
         self.requires(f"boost-type-traits/{self.version}")

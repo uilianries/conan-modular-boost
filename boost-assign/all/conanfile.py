@@ -31,6 +31,7 @@ class BoostAssignConan(ConanFile):
         self.requires(f"boost-array/{self.version}")
         self.requires(f"boost-core/{self.version}")
         self.requires(f"boost-move/{self.version}")
+        self.requires(f"boost-mpl/{self.version}")
         self.requires(f"boost-preprocessor/{self.version}")
         self.requires(f"boost-ptr-container/{self.version}")
         self.requires(f"boost-range/{self.version}")
