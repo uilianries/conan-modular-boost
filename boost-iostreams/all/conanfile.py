@@ -82,7 +82,8 @@ class BoostIostreamsConan(ConanFile):
         if self.options.enable_lzma:
             self.requires("xz_utils/[>=5.4.5 <6]")
         if self.options.enable_zstd:
-            self.requires("zstd/[>=1.5 <1.6]")
+            # INFO: libtiff/4.7.0 requires zstd/1.5.5 so we can not use 1.5.7
+            self.requires("zstd/1.5.5")
         if self.options.enable_zlib:
             self.requires("zlib/[>=1.2.11 <2]")
 

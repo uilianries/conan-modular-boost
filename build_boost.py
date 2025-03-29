@@ -6,7 +6,7 @@ import logging
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
     logger = logging.getLogger(__name__)
 
     arg_parser = argparse.ArgumentParser(prog='build_boost',
