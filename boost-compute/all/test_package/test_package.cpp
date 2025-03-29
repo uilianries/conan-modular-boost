@@ -1,8 +1,7 @@
-#include <boost/compute.hpp>
+#include <boost/compute/config.hpp>
 #include <iostream>
 
 int main() {
-    boost::compute::device device;
-    std::cout << "Boost Compute test package" << std::endl;
+    std::cout << "Boost Compute test package: " << BOOST_COMPUTE_MAX_ARITY << std::endl;
     return 0;
 }
