@@ -29,6 +29,7 @@ class BoostPRFConan(ConanFile):
     def requirements(self):
         self.requires(f"boost-headers/{self.version}")
         self.requires(f"boost-config/{self.version}")
+        self.requires(f"boost-assert/{self.version}")
 
     def validate(self):
         check_min_cppstd(self, "14")

@@ -32,6 +32,14 @@ class BoostRegexConan(ConanFile):
         self.requires(f"boost-throw-exception/{self.version}")
         self.requires(f"boost-predef/{self.version}")
         self.requires(f"boost-assert/{self.version}")
+        self.requires(f"boost-concept-check/{self.version}")
+        self.requires(f"boost-container-hash/{self.version}")
+        self.requires(f"boost-core/{self.version}")
+        self.requires(f"boost-integer/{self.version}")
+        self.requires(f"boost-mpl/{self.version}")
+        self.requires(f"boost-smart-ptr/{self.version}")
+        self.requires(f"boost-static-assert/{self.version}")
+        self.requires(f"boost-type-traits/{self.version}")
         self.requires("icu/76.1")
 
     def validate(self):
@@ -56,5 +64,3 @@ class BoostRegexConan(ConanFile):
         self.cpp_info.defines = ["BOOST_HAS_ICU"]
         self.cpp_info.components["regex_icu"].bindirs = []
         self.cpp_info.components["regex_icu"].libdirs = []
-
-

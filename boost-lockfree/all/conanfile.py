@@ -37,6 +37,8 @@ class BoostLockfreeConan(ConanFile):
         self.requires(f"boost-predef/{self.version}")
         self.requires(f"boost-static-assert/{self.version}")
         self.requires(f"boost-utility/{self.version}")
+        self.requires(f"boost-throw-exception/{self.version}")
+        self.requires(f"boost-type-traits/{self.version}")
 
     def validate(self):
         check_min_cppstd(self, "14")

@@ -29,7 +29,7 @@ class BoostSpiritConan(ConanFile):
         self.requires(f"boost-headers/{self.version}")
         self.requires(f"boost-config/{self.version}")
         self.requires(f"boost-array/{self.version}")
-        self.requires(f"boost-assert/{self.version}")        
+        self.requires(f"boost-assert/{self.version}")
         self.requires(f"boost-core/{self.version}")
         self.requires(f"boost-endian/{self.version}")
         self.requires(f"boost-function/{self.version}")
@@ -55,6 +55,7 @@ class BoostSpiritConan(ConanFile):
         self.requires(f"boost-unordered/{self.version}")
         self.requires(f"boost-utility/{self.version}")
         self.requires(f"boost-variant/{self.version}")
+        self.requires(f"boost-regex/{self.version}")
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)

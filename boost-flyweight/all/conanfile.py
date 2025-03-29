@@ -40,6 +40,7 @@ class BoostFlyweightConan(ConanFile):
         self.requires(f"boost-smart-ptr/{self.version}")
         self.requires(f"boost-throw-exception/{self.version}")
         self.requires(f"boost-type-traits/{self.version}")
+        self.requires(f"boost-unordered/{self.version}")
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)

@@ -28,6 +28,7 @@ class BoostProcessConan(ConanFile):
     def requirements(self):
         self.requires(f"boost-headers/{self.version}", transitive_headers=True)
         self.requires(f"boost-config/{self.version}", transitive_headers=True)
+        self.requires(f"boost-assert/{self.version}", transitive_headers=True)
         self.requires(f"boost-algorithm/{self.version}", transitive_headers=True)
         self.requires(f"boost-asio/{self.version}", transitive_headers=True)
         self.requires(f"boost-core/{self.version}", transitive_headers=True)
@@ -39,6 +40,10 @@ class BoostProcessConan(ConanFile):
         self.requires(f"boost-tokenizer/{self.version}", transitive_headers=True)
         self.requires(f"boost-type-index/{self.version}", transitive_headers=True)
         self.requires(f"boost-winapi/{self.version}", transitive_headers=True)
+        self.requires(f"boost-io/{self.version}", transitive_headers=True)
+        self.requires(f"boost-throw-exception/{self.version}", transitive_headers=True)
+        self.requires(f"boost-type-traits/{self.version}", transitive_headers=True)
+        self.requires(f"boost-utility/{self.version}", transitive_headers=True)
         if not self.options.use_std_fs:
             self.requires(f"boost-filesystem/{self.version}", transitive_headers=True)
 

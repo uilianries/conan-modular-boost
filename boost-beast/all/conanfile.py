@@ -47,6 +47,9 @@ class BoostBeastConan(ConanFile):
         self.requires(f"boost-type-traits/{self.version}")
         self.requires(f"boost-utility/{self.version}")
         self.requires(f"boost-winapi/{self.version}")
+        self.requires(f"boost-container-hash/{self.version}")
+        self.requires(f"boost-preprocessor/{self.version}")
+        self.requires(f"boost-type-index/{self.version}")
 
     def validate(self):
         check_min_cppstd(self, "11")

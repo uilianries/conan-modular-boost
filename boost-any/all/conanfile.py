@@ -29,6 +29,7 @@ class BoostAnyConan(ConanFile):
     def requirements(self):
         self.requires(f"boost-headers/{self.version}")
         self.requires(f"boost-config/{self.version}")
+        self.requires(f"boost-assert/{self.version}")
         self.requires(f"boost-throw-exception/{self.version}")
         self.requires(f"boost-type-index/{self.version}")
 

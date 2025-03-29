@@ -42,6 +42,7 @@ class BoostMySQLConan(ConanFile):
         self.requires(f"boost-system/{self.version}")
         self.requires(f"boost-throw-exception/{self.version}")
         self.requires(f"boost-variant2/{self.version}")
+        self.requires(f"boost-pfr/{self.version}")
         self.requires("openssl/[>=1.1 <4]")
 
     def validate(self):

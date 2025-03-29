@@ -32,6 +32,7 @@ class BoostHanaConan(ConanFile):
         self.requires(f"boost-core/{self.version}")
         self.requires(f"boost-mpl/{self.version}")
         self.requires(f"boost-tuple/{self.version}")
+        self.requires(f"boost-fusion/{self.version}")
 
     def validate(self):
         check_min_cppstd(self, "14")

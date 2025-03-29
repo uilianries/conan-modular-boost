@@ -29,6 +29,8 @@ class BoostJsonConan(ConanFile):
         self.requires(f"boost-headers/{self.version}")
         # transitive headers: boost/json/detail/charconv/limits.hpp:8
         self.requires(f"boost-config/{self.version}", transitive_headers=True)
+        self.requires(f"boost-assert/{self.version}", transitive_headers=True)
+        self.requires(f"boost-static-assert/{self.version}", transitive_headers=True)
         # transitive headers: boost/json/impl/static_resource.ipp:15
         self.requires(f"boost-align/{self.version}", transitive_headers=True)
         # transitive headers: boost/json/detail/config.hpp:15

@@ -29,6 +29,7 @@ class BoostGILConan(ConanFile):
     def requirements(self):
         self.requires(f"boost-headers/{self.version}")
         self.requires(f"boost-config/{self.version}")
+        self.requires(f"boost-assert/{self.version}")
         self.requires(f"boost-concept-check/{self.version}")
         self.requires(f"boost-container-hash/{self.version}")
         self.requires(f"boost-core/{self.version}")

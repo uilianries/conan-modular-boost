@@ -29,8 +29,10 @@ class BoostPoolConan(ConanFile):
         self.requires(f"boost-headers/{self.version}")
         self.requires(f"boost-config/{self.version}")
         self.requires(f"boost-assert/{self.version}")
+        self.requires(f"boost-assert/{self.version}")
         self.requires(f"boost-integer/{self.version}")
         self.requires(f"boost-throw-exception/{self.version}")
+        self.requires(f"boost-type-traits/{self.version}")
         if self.settings.os == "Windows":
             self.requires(f"boost-winapi/{self.version}")
 

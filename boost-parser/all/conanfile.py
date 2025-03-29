@@ -31,6 +31,7 @@ class BoostParserConan(ConanFile):
         self.requires(f"boost-assert/{self.version}")
         self.requires(f"boost-hana/{self.version}")
         self.requires(f"boost-type-index/{self.version}")
+        self.requires(f"boost-charconv/{self.version}")
 
     def validate(self):
         check_min_cppstd(self, "11")

@@ -59,7 +59,8 @@ class BoostTimerConan(ConanFile):
             self.options.enable_from_exception = False
 
     def requirements(self):
-        self.requires(f"boost-headers/{self.version}")
+        self.requires(f"boost-headers/{self.version}", transitive_headers=True)
+        self.requires(f"boost-assert/{self.version}", transitive_headers=True)
         # transitive headers: boost/stacktrace.hpp:10
         self.requires(f"boost-config/{self.version}", transitive_headers=True)
         # transitive headers: boost/stacktrace/stacktrace.hpp:16

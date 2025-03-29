@@ -42,6 +42,7 @@ class BoostLeafConan(ConanFile):
         self.requires(f"boost-throw-exception/{self.version}")
         self.requires(f"boost-type-traits/{self.version}")
         self.requires(f"boost-utility/{self.version}")
+        self.requires(f"boost-type-index/{self.version}")
 
     def validate(self):
         check_min_cppstd(self, "11")

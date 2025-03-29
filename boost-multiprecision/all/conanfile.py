@@ -35,6 +35,8 @@ class BoostMultiprecisionConan(ConanFile):
         self.requires(f"boost-lexical-cast/{self.version}")
         self.requires(f"boost-math/{self.version}")
         self.requires(f"boost-random/{self.version}")
+        self.requires(f"boost-predef/{self.version}")
+        self.requires(f"boost-throw-exception/{self.version}")
 
     def validate(self):
         check_min_cppstd(self, "14")

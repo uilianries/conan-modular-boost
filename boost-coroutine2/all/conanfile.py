@@ -29,6 +29,7 @@ class BoostCoroutine2Conan(ConanFile):
     def requirements(self):
         self.requires(f"boost-headers/{self.version}")
         self.requires(f"boost-config/{self.version}")
+        self.requires(f"boost-assert/{self.version}")
         self.requires(f"boost-context/{self.version}")
 
     def validate(self):

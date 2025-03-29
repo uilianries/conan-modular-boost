@@ -37,6 +37,9 @@ class BoostHeapConan(ConanFile):
         self.requires(f"boost-parameter/{self.version}")
         self.requires(f"boost-static-assert/{self.version}")
         self.requires(f"boost-throw-exception/{self.version}")
+        self.requires(f"boost-array/{self.version}")
+        self.requires(f"boost-bind/{self.version}")
+        self.requires(f"boost-type-traits/{self.version}")
 
     def validate(self):
         check_min_cppstd(self, "14")
