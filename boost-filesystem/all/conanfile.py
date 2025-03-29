@@ -146,7 +146,7 @@ class BoostFilesystemConan(ConanFile):
         self.cpp_info.libs = ["boost_filesystem"]
         if self.settings.os in ["Windows"]:
             self.cpp_info.system_libs = ["advapi32"]
-            if not self.options.bcrypt:
+            if not self.options.disable_bcrypt:
                 self.cpp_info.system_libs.append("bcrypt")
         self.cpp_info.defines = [
             "BOOST_FILESYSTEM_NO_LIB",

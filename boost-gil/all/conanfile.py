@@ -44,6 +44,7 @@ class BoostGILConan(ConanFile):
         self.requires("libpng/[>=1.6 <2]")
         self.requires("libjpeg/9e")
         self.requires("libtiff/[>=4.7.0 <5]")
+        self.requires("zlib/[>=1.2.11 <2]")
 
     def validate(self):
         check_min_cppstd(self, "14")

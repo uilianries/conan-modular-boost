@@ -43,8 +43,9 @@ if __name__ == '__main__':
     logger.info(f"Found {len(regular_libraries)} Boost modules that are regular libraries.")
 
     if not args.skip_export:
-        for folder in folder_list:
-            logger.info(f'Exporting {folder}')
+        total = len(folder_list)
+        for index, folder in enumerate(folder_list):
+            logger.info(f'=== Exporting {folder} ({index + 1}/{total}) ===')
             subprocess.run(f'conan export {folder}/all --version={boost_version}', shell=True, check=True)
 
     temp_dir = os.getenv('RUNNER_TEMP') or "/tmp"
@@ -56,7 +57,7 @@ if __name__ == '__main__':
         for module in folder_list:
             fd.write(f"{module}/{boost_version}\n")
 
-    logger.info(f"Calculating build order for {len(folder_list)} Boost modules.")
+    logger.info(f"=== Calculating build order for {len(folder_list)} Boost modules. ===")
     context = subprocess.run(f'conan graph build-order {conanfile} --format=json --order-by=recipe --update --build=missing -s compiler.cppstd=20', shell=True, capture_output=True, text=True)
     if context.returncode != 0:
         logger.error(f"Failed to build order: {context.stderr}")
@@ -69,10 +70,11 @@ if __name__ == '__main__':
             if reference.startswith('boost-') and os.path.isdir(reference):
                 references.append(reference)
 
-    logger.info(f"Build order ({len(references)}): {references}")
+    logger.info(f"=== Build order ({len(references)}): {references} ===")
 
     if not args.skip_create:
-        for reference in references:
+        total = len(references)
+        for index, reference in enumerate(references):
             if continue_last_built:
                 if os.path.exists(last_built):
                     with open(last_built, 'r') as fd:
@@ -85,7 +87,7 @@ if __name__ == '__main__':
                     continue_last_built = False
                     logger.error(f'Could not find {last_built} to continue from.')
 
-            logger.info(f'Creating {reference}')
+            logger.info(f'=== Creating {reference} ({index + 1}/{total}) ===')
             with open(last_built, 'w') as fd:
                 fd.write(reference)
             subprocess.run(f'conan create {reference}/all --version={boost_version} --build=missing -s compiler.cppstd=20', shell=True, check=True)

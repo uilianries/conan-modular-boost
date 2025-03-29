@@ -42,6 +42,7 @@ class BoostTimerConan(ConanFile):
         tc = CMakeToolchain(self)
         # Boost Time does not have find_package, so we need to include them manually
         tc.cache_variables["CMAKE_PROJECT_boost_timer_INCLUDE"] = os.path.join(self.source_folder, os.pardir, "conan_project_include.cmake")
+        tc.cache_variables["BUILD_TESTING"] = False
         tc.generate()
         deps = CMakeDeps(self)
         deps.generate()

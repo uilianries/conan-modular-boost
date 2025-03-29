@@ -58,6 +58,7 @@ class BoostCoroutineConan(ConanFile):
         tc = CMakeToolchain(self)
         # Boost does not have find_package, so we need to include them manually
         tc.cache_variables["CMAKE_PROJECT_boost_coroutine_INCLUDE"] = os.path.join(self.source_folder, os.pardir, "conan_project_include.cmake")
+        tc.cache_variables["BUILD_TESTING"] = False
         tc.generate()
         deps = CMakeDeps(self)
         deps.generate()
@@ -90,8 +91,8 @@ class BoostCoroutineConan(ConanFile):
             self.cpp_info.system_libs = ["pthread"]
         # INFO: Boost Coroutine has duplicated/messed defines: COROUTINE COUROUTINES
         self.cpp_info.defines = [
-            "BOOST_COROUTINE_NO_LIB=1", "BOOST_COROUTINES_NO_LIB=1"
-            "BOOST_COROUTINE_DYN_LINK=1" if self.options.shared else "BOOST_COROUTINE_STATIC_LINK=1",
-            "BOOST_COROUTINES_DYN_LINK=1" if self.options.shared else "BOOST_COROUTINES_STATIC_LINK=1"]
+            "BOOST_COROUTINE_NO_LIB", "BOOST_COROUTINES_NO_LIB",
+            "BOOST_COROUTINE_DYN_LINK" if self.options.shared else "BOOST_COROUTINE_STATIC_LINK",
+            "BOOST_COROUTINES_DYN_LINK" if self.options.shared else "BOOST_COROUTINES_STATIC_LINK"]
         if self.options.use_segmented_stacks:
             self.cpp_info.defines.append("BOOST_USE_SEGMENTED_STACKS=1")

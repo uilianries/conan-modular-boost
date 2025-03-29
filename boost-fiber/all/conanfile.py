@@ -27,7 +27,7 @@ class BoostFiberConan(ConanFile):
 
     def requirements(self):
         self.requires(f"boost-headers/{self.version}")
-        # transitive headers: boost/fiber/operations.hpp:11:#include <boost/config.hpp> 
+        # transitive headers: boost/fiber/operations.hpp:11:#include <boost/config.hpp>
         self.requires(f"boost-config/{self.version}", transitive_headers=True)
         # transitive headers: boost/fiber/mutex.hpp:12:#include <boost/assert.hpp>
         self.requires(f"boost-assert/{self.version}", transitive_headers=True)
@@ -41,7 +41,7 @@ class BoostFiberConan(ConanFile):
         self.requires(f"boost-predef/{self.version}", transitive_headers=True)
         # transitive headers: boost/fiber/fiber.hpp:17:#include <boost/intrusive_ptr.hpp>
         self.requires(f"boost-smart-ptr/{self.version}", transitive_headers=True)
-        
+
         self.requires(f"boost-algorithm/{self.version}")
         self.requires(f"boost-filesystem/{self.version}")
         self.requires(f"boost-format/{self.version}")
@@ -87,12 +87,14 @@ class BoostFiberConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.set_property("cmake_file_name", "boost_fiber")
-        
+
         self.cpp_info.components["fiber"].set_property("cmake_target_name", "Boost::fiber")
         self.cpp_info.components["fiber"].libs = ["boost_fiber"]
+        # INFO: Boost Fiber mixes BOOST_FIBER and BOOST_FIBERS defines
         self.cpp_info.components["fiber"].defines = [
-            "BOOST_FIBER_NO_LIB",
-            "BOOST_FIBER_DYN_LINK" if self.options.shared else "BOOST_FIBER_STATIC_LINK"]
+            "BOOST_FIBER_NO_LIB", "BOOST_FIBERS_NO_LIB",
+            "BOOST_FIBER_DYN_LINK" if self.options.shared else "BOOST_FIBER_STATIC_LINK",
+            "BOOST_FIBERS_DYN_LINK" if self.options.shared else "BOOST_FIBERS_STATIC_LINK"]
         self.cpp_info.components["fiber"].requires = [
             "boost-headers::boost-headers",
             "boost-config::boost-config",
@@ -102,7 +104,7 @@ class BoostFiberConan(ConanFile):
             "boost-intrusive::boost-intrusive",
             "boost-predef::boost-predef",
             "boost-smart-ptr::boost-smart-ptr",
-        ]            
+        ]
         self.cpp_info.components["fiber_numa"].set_property("cmake_target_name", "Boost::fiber_numa")
         self.cpp_info.components["fiber_numa"].libs = ["boost_fiber_numa"]
         self.cpp_info.components["fiber_numa"].requires = [

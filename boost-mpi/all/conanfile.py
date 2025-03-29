@@ -24,6 +24,10 @@ class BoostMPIConan(ConanFile):
     def export_sources(self):
         copy(self, "conan_project_include.cmake", self.recipe_folder, self.export_sources_folder)
 
+    def config_options(self):
+        if self.settings.os == "Windows":
+            del self.options.fPIC
+
     def requirements(self):
         self.requires(f"boost-headers/{self.version}", transitive_headers=True)
         self.requires(f"boost-config/{self.version}", transitive_headers=True)
@@ -47,7 +51,11 @@ class BoostMPIConan(ConanFile):
 
         self.requires(f"boost-lexical-cast/{self.version}")
         self.requires(f"boost-utility/{self.version}")
+        # TODO: Add support for Windows
+        # Include MS-MPI as requirement once available
+        # https://github.com/microsoft/Microsoft-MPI
         if self.settings.os != "Windows":
+            # INFO: OpenMPI package is not available for Windows
             self.requires("openmpi/4.1.6", options={"enable_cxx": True}, transitive_headers=True)
 
     def layout(self):
