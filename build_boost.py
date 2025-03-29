@@ -55,13 +55,13 @@ if __name__ == '__main__':
         for module in folder_list:
             fd.write(f"{module}/{boost_version}\n")
 
-    context = subprocess.run(f'conan graph build-order {conanfile} --format=json --build=missing -s compiler.cppstd=20', shell=True, capture_output=True, text=True)
+    context = subprocess.run(f'conan graph build-order {conanfile} --format=json --order-by=recipe --build=missing -s compiler.cppstd=20', shell=True, capture_output=True, text=True)
     if context.returncode != 0:
         logger.error(f"Failed to build order: {context.stderr}")
         exit(1)
     graph = json.loads(context.stdout)
     references = []
-    for level in graph:
+    for level in graph["order"]:
         for node in level:
             reference = node['ref'][:node['ref'].find('/')]
             if reference.startswith('boost-') and os.path.isdir(reference):
