@@ -9,11 +9,11 @@ required_conan_version = ">=2.4"
 
 class BoostParameterConan(ConanFile):
     name = "boost-parameter"
-    description = "A lightweight error handling library for C++11"
+    description = "Boost.Parameter Library - Write functions that accept arguments by name."
     license = "BSL-1.0"
     url = "https://github.com/conan-io/conan-center-index"
     homepage = "https://www.boost.org/"
-    topics = ("boost", "error-handling", "header-only")
+    topics = ("boost", "emulation", "programming", "header-only")
     package_type = "header-library"
     languages = "C++"
     settings = "os", "arch", "compiler", "build_type"

@@ -9,7 +9,7 @@ required_conan_version = ">=2.4"
 
 class BoostPhoenixConan(ConanFile):
     name = "boost-phoenix"
-    description = "Define small unnamed function objects at the actual call site, and more"
+    description = "Phoenix enables Functional Programming (FP) in C++"
     license = "BSL-1.0"
     url = "https://github.com/conan-io/conan-center-index"
     homepage = "https://www.boost.org/"

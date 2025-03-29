@@ -9,11 +9,11 @@ required_conan_version = ">=2.4"
 
 class BoostStaticAssertConan(ConanFile):
     name = "boost-static-assert"
-    description = "A lightweight error handling library for C++11"
+    description = "Static assertions (compile time assertions)"
     license = "BSL-1.0"
     url = "https://github.com/conan-io/conan-center-index"
     homepage = "https://www.boost.org/"
-    topics = ("boost", "error-handling", "header-only")
+    topics = ("boost", "correctness", "generic", "metaprogramming", "header-only")
     package_type = "header-library"
     languages = "C++"
     settings = "os", "arch", "compiler", "build_type"

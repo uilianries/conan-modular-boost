@@ -1,6 +1,7 @@
 from conan import ConanFile
 from conan.tools.files import copy, get, download
 from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps, cmake_layout
+from conan.tools.build import check_min_cppstd
 import os
 
 
@@ -9,11 +10,11 @@ required_conan_version = ">=2.4"
 
 class BoostCharconvConan(ConanFile):
     name = "boost-charconv"
-    description = "Event timer, progress timer, and progress display classes"
+    description = "An implementation of <charconv> in C++11."
     license = "BSL-1.0"
     url = "https://github.com/conan-io/conan-center-index"
     homepage = "https://www.boost.org/"
-    topics = ("boost", "miscellaneous", "time")
+    topics = ("boost", "miscellaneous", "string")
     package_type = "library"
     languages = "C++"
     settings = "os", "arch", "compiler", "build_type"
@@ -35,6 +36,9 @@ class BoostCharconvConan(ConanFile):
 
     def layout(self):
         cmake_layout(self, src_folder="src")
+    
+    def validate(self):
+        check_min_cppstd(self, "11")
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)

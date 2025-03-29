@@ -9,11 +9,11 @@ required_conan_version = ">=2.4"
 
 class BoostMultiArrayConan(ConanFile):
     name = "boost-multi-array"
-    description = "A lightweight error handling library for C++11"
+    description = " a generic N-dimensional array concept definition and common implementations of that interface"
     license = "BSL-1.0"
     url = "https://github.com/conan-io/conan-center-index"
     homepage = "https://www.boost.org/"
-    topics = ("boost", "error-handling", "header-only")
+    topics = ("boost", "containers", "math", "header-only")
     package_type = "header-library"
     languages = "C++"
     settings = "os", "arch", "compiler", "build_type"

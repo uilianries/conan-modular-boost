@@ -61,7 +61,7 @@ if __name__ == '__main__':
             if reference.startswith('boost-') and os.path.isdir(reference):
                 references.append(reference)
 
-    logger.info(f"Build order: {references}")
+    logger.info(f"Build order ({len(references)}): {references}")
 
     if not args.skip_create:
         for reference in references:
