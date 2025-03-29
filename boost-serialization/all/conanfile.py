@@ -101,7 +101,8 @@ class BoostSerializationConan(ConanFile):
                 "boost-mpl::boost-mpl", "boost-optional::boost-optional",
                 "boost-predef::boost-predef", "boost-preprocessor::boost-preprocessor",
                 "boost-smart-ptr::boost-smart-ptr", "boost-spirit::boost-spirit",
-                "boost-static-assert::boost-static-assert",
+                "boost-static-assert::boost-static-assert", "boost-assert::boost-assert",
                 "boost-type-traits::boost-type-traits", "boost-variant::boost-variant",
-                "boost-utility::boost-utility", "boost-variant2::boost-variant2",]
+                "boost-utility::boost-utility", "boost-variant2::boost-variant2",
+                "boost-mp11::boost-mp11", "boost-throw-exception::boost-throw-exception",]
         self.cpp_info.components["wserialization"].requires.append("serialization")
