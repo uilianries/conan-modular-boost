@@ -40,6 +40,10 @@ class BoostGILConan(ConanFile):
         self.requires(f"boost-type-traits/{self.version}")
         self.requires(f"boost-variant2/{self.version}")
 
+        self.requires("libpng/[>=1.6 <2]")
+        self.requires("libjpeg/9e")
+        self.requires("libtiff/[>=4.7.0 <5]")
+
     def validate(self):
         check_min_cppstd(self, "14")
 
