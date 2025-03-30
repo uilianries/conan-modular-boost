@@ -3,8 +3,14 @@ name: Build Boost Libraries
 on:
   push:
     branches: [ main ]
+    paths:
+    - 'boost-*/*'
+    - '.github/*'
   pull_request:
     branches: [ main ]
+    paths:
+    - 'boost-*/*'
+    - '.github/*'
   workflow_dispatch:
 
 env:
