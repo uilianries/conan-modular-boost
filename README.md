@@ -31,10 +31,13 @@ It does not respect the build order, so it is recommended to use the script `bui
 
 The C++20 is required due [Boost Cobalt](https://www.boost.org/doc/libs/1_87_0/libs/cobalt/doc/html/index.html) only.
 
-## TODO
+## Grouping all modules in a single package
 
-- Solve any Boost modules by find_package(Boost COMPONENTS ...)
+This is an open discussion, but [boost-modular](boost-modular) is the current workaround:
+It groups all modules in a single Conan package, then generates a CMakeDeps respecting the original Boost structure.
+
 - See https://cmake.org/cmake/help/v3.31/module/FindBoost.html#boost-cmake
+
 
 ## License
 

@@ -25,7 +25,7 @@ if __name__ == '__main__':
     continue_last_built = args.last_build
 
     for folder in os.listdir('.'):
-        if os.path.isdir(folder) and folder.startswith('boost-'):
+        if os.path.isdir(folder) and folder.startswith('boost-') and folder != 'boost-modular':
             folder_list.append(folder)
 
     logger.info(f"Found {len(folder_list)} Boost modules in total to be exported.")
