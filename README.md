@@ -7,7 +7,7 @@ This is a modularized version of the [Boost](https://www.boost.org/) library for
 
 ## Modules
 
-The Boost 1.87.0 is composed by 153 modules, where 122 are header-only and 31 are compiled. Plus, in terms of dependencies, we have 21 levels of interdependencies.
+The Boost 1.87.0 is composed by 153 modules, where 123 are header-only and 30 are compiled. Plus, in terms of dependencies, we have 21 levels of interdependencies.
 
 For visualization, first you can check the [Boost Dependency Report](https://pdimov.github.io/boostdep-report/boost-1.87.0/module-levels.html).
 Its extracted content is available in JSON format in the file [boost_module_dependencies.json](boost_module_dependencies.json).
